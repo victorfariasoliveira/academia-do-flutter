@@ -406,4 +406,5 @@ No Flutter, os widgets são os principais componentes para criar a interface do 
 12. Stack: Permite sobrepor widgets uns sobre os outros.
 13. Card: Um widget que exibe informações em um bloco de material elevado, geralmente usado para representar itens em uma lista.
 14. GridView: Permite criar uma grade rolável de widgets.
-15. Estes são apenas alguns dos muitos widgets disponíveis no Flutter. A lista completa pode ser encontrada na documentação oficial do Flutter: [https://api.flutter.dev/flutter/widgets/widgets-library.html](https://api.flutter.dev/flutter/widgets/widgets-library.html)
+
+Estes são apenas alguns dos muitos widgets disponíveis no Flutter. A lista completa pode ser encontrada na documentação oficial do Flutter: [https://api.flutter.dev/flutter/widgets/widgets-library.html](https://api.flutter.dev/flutter/widgets/widgets-library.html)
