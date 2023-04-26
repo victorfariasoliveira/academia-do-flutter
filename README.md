@@ -345,3 +345,65 @@ class _MyWidgetState extends State<MyWidget> {
 ```
 
 No exemplo acima, o `SnackBar` é exibido assim que a tela é carregada e renderizada. O `addPostFrameCallback` garante que a ação seja executada somente após a interface do usuário estar pronta.
+
+---
+
+# Flutter Mão na Massa
+
+> Descrição das aulas
+
+- Inicializamos um novo projeto, o flutter mão na massa
+- Limpamos os comentários dentro do main.dart com o comando no visual studio code:
+
+```text
+"ctrl + shif + p" -> Remove All Comments
+```
+
+> > Só é possível graças a extensão _Remove Comments_
+
+- Configuração do arquivo Main.dart
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_maonamassa/home/home_page.dart';
+
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Flutter Demo',
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+```
+
+> > Este arquivo é separado apenas para configurações, e apontar para a tela principal do app. Nessa tela principal criaremos a lógica e o layout para que os fluxos do app aconteçam.
+
+## Principais Widgets
+
+No Flutter, os widgets são os principais componentes para criar a interface do usuário de um aplicativo. Existem muitos widgets disponíveis, mas aqui estão alguns dos principais e mais comumente usados:
+
+1.  StatelessWidget e StatefulWidget: São as classes básicas para criar widgets imutáveis e mutáveis, respectivamente.
+2.  MaterialApp: É o widget principal para aplicativos baseados em Material Design. Ele proporciona a estrutura básica de um aplicativo.
+3.  Scaffold: Fornece uma estrutura básica para a tela do aplicativo, como a AppBar, o Drawer e o FloatingActionButton.
+4.  AppBar: Representa a barra de aplicativos no topo da tela. Pode incluir um título, botões de ação e outros elementos.
+5.  Text: É o widget responsável por exibir um simples texto formatado na tela.
+6.  TextField: Permite a entrada de texto pelo usuário e é usado para criar campos de texto, como caixas de pesquisa e formulários.
+7.  RaisedButton, FlatButton e IconButton: São widgets usados para criar diferentes tipos de botões com funcionalidades específicas.
+8.  Column e Row: São widgets usados para organizar outros widgets verticalmente (Column) ou horizontalmente (Row).
+9.  Container: Um widget que permite adicionar preenchimento, margens, bordas e outros atributos de estilo aos widgets filhos.
+10. Image: É o widget responsável por exibir imagens a partir de diferentes fontes, como assets ou URLs.
+11. ListView: Permite criar listas roláveis de widgets.
+12. Stack: Permite sobrepor widgets uns sobre os outros.
+13. Card: Um widget que exibe informações em um bloco de material elevado, geralmente usado para representar itens em uma lista.
+14. GridView: Permite criar uma grade rolável de widgets.
+15. Estes são apenas alguns dos muitos widgets disponíveis no Flutter. A lista completa pode ser encontrada na documentação oficial do Flutter: [https://api.flutter.dev/flutter/widgets/widgets-library.html](https://api.flutter.dev/flutter/widgets/widgets-library.html)
