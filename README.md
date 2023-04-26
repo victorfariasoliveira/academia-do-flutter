@@ -208,3 +208,132 @@ class _MeuStatefulWidgetState extends State<MeuStatefulWidget> {
 ```
 
 Em resumo, um StatelessWidget é usado para partes estáticas da interface do usuário que não precisam de atualizações dinâmicas, enquanto um StatefulWidget é usado para partes mutáveis da interface do usuário que requerem atualizações e interações.
+
+
+## Árvore de componentes 
+
+No Flutter, a estrutura de uma aplicação é organizada em três partes principais: Widget Tree, Element Tree e Render Tree. Essas árvores trabalham juntas para criar e atualizar a interface do usuário.
+
+1.  Widget Tree (Árvore de Widgets): A Widget Tree é a representação hierárquica dos componentes da interface do usuário no Flutter. Widgets são elementos imutáveis que descrevem como a interface deve aparecer. Eles são os blocos de construção básicos do Flutter e podem ser simples, como um texto ou um botão, ou complexos, como um container que contém outros widgets.
+
+Quando você escreve o código do aplicativo, você essencialmente define a Widget Tree, que então é usada para construir a Element Tree.
+
+2.  Element Tree (Árvore de Elementos): A Element Tree é uma representação em tempo de execução da Widget Tree. Cada widget na Widget Tree tem um elemento correspondente na Element Tree. Os elementos são instâncias mutáveis que gerenciam o ciclo de vida dos widgets e facilitam a atualização da interface do usuário.
+
+A principal função dos elementos é conectar a Widget Tree à Render Tree. Quando um widget é atualizado, um novo elemento é criado para substituir o elemento antigo na Element Tree, que por sua vez atualiza a Render Tree.
+
+3.  Render Tree (Árvore de Renderização): A Render Tree é uma representação otimizada da interface do usuário, responsável pelo layout e pintura dos widgets na tela. A Render Tree é criada a partir da Element Tree, mas contém apenas os elementos que realmente precisam ser renderizados, como texto, imagens e formas.
+
+A Render Tree gerencia o processo de layout (posicionamento e dimensionamento dos elementos) e pintura (desenho dos elementos na tela). Quando ocorre uma mudança na Element Tree, a Render Tree é atualizada para refletir essas mudanças, e o aplicativo é redesenhado na tela.
+
+Em resumo, a Widget Tree descreve a estrutura da interface do usuário, a Element Tree gerencia o ciclo de vida e atualizações dos widgets, e a Render Tree lida com o layout e a renderização na tela. Essas três árvores trabalham em conjunto para criar e atualizar a interface do usuário do aplicativo Flutter.
+
+![[Pasted image 20230425231822.png]]
+> Na imagem, podemos ver a ligação entre as árvores.
+
+
+## Ciclo de Vida
+
+O ciclo de vida de um widget no Flutter é um aspecto importante a ser compreendido ao trabalhar com essa estrutura. Os widgets podem ser divididos em dois tipos: `StatelessWidget` e `StatefulWidget`. Vamos ver o ciclo de vida de cada um.
+
+### StatelessWidget:
+
+Um `StatelessWidget` é um widget que descreve parte da interface do usuário que não depende de nenhuma informação de estado. Ele tem um ciclo de vida simples:
+
+1. Constructor (Construtor): O construtor é chamado quando o widget é criado.
+2. Build: O método `build` é chamado para descrever a aparência do widget na tela. Ele recebe um objeto `BuildContext` como parâmetro e retorna um novo widget que descreve a aparência do widget na tela. O método `build` é chamado toda vez que o Flutter precisa redesenhar a interface do usuário.
+
+### StatefulWidget:
+
+Um `StatefulWidget`, por outro lado, é um widget que pode mudar ao longo do tempo. Ele tem um ciclo de vida mais complexo, que envolve a criação de um objeto de estado:
+
+1. Constructor (Construtor): O construtor do StatefulWidget é chamado quando o widget é criado.
+2. createState: O método `createState` é chamado imediatamente após o construtor para criar um objeto `State` que armazenará o estado do widget.
+3. State Constructor (Construtor do Estado): O construtor do objeto `State` é chamado após a criação do objeto `State`.
+4. initState: O método `initState` é chamado imediatamente após o construtor do objeto `State`. Ele é usado para inicializar variáveis de estado ou realizar qualquer configuração inicial. Esse método é chamado apenas uma vez durante o ciclo de vida do objeto `State`.
+5. didChangeDependencies: Este método é chamado quando um objeto `InheritedWidget`, do qual este widget depende, muda. Ele pode ser chamado imediatamente após `initState` e sempre que as dependências mudam durante o ciclo de vida do objeto `State`.
+6. Build: Assim como no StatelessWidget, o método `build` é chamado para descrever a aparência do widget na tela. Ele é chamado sempre que o estado muda e o Flutter precisa redesenhar a interface do usuário.
+
+Além desses métodos, o objeto `State` também possui métodos como `didUpdateWidget` (chamado quando o StatefulWidget é atualizado) e `dispose` (chamado quando o objeto `State` está prestes a ser removido da árvore).
+
+Em resumo, os StatelessWidgets têm um ciclo de vida simples, com construtor e método `build`, enquanto os StatefulWidgets têm um ciclo de vida mais complexo, envolvendo a criação de um objeto `State` e a utilização de diversos métodos de ciclo de vida, como `initState`, `didChangeDependencies`, `build`, `didUpdateWidget` e `dispose`.
+
+![[Pasted image 20230425233129.png]]
+> Na imagem, podemos ver o ciclo de vida em detalhes.
+
+## Executando funções depois da tela pronta (addPostFrameCallback)
+
+O `addPostFrameCallback` é uma função no Flutter que permite programar a execução de um trecho de código logo após a tela ter sido completamente desenhada e renderizada. Ele é útil quando você deseja realizar alguma ação que dependa de a interface do usuário estar pronta, como exibir um aviso, uma mensagem ou qualquer animação.
+
+Em termos simples, imagine que o Flutter desenha sua interface como uma série de imagens chamadas "frames". Depois que um frame é desenhado e a interface do usuário é atualizada, você pode usar o `addPostFrameCallback` para executar um código específico. Isso garante que sua ação seja realizada somente depois que a tela estiver pronta e visível para o usuário. Um exemplo comum de uso é exibir um `SnackBar` ou um `AlertDialog` assim que a tela é carregada.
+
+Para usar o `addPostFrameCallback` em sua aplicação Flutter, siga estas etapas:
+
+1. Importe o pacote `flutter/widgets.dart`:
+
+```dart
+import 'package:flutter/widgets.dart';
+```
+
+2. Registre o callback usando `WidgetsBinding.instance.addPostFrameCallback` dentro do método `initState` de um `StatefulWidget`:
+
+```dart
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      // Coloque aqui o código que você deseja executar após a conclusão do próximo frame de renderização.
+    });
+  }
+
+  // ...
+}
+```
+
+Aqui está um exemplo completo de como usar o `addPostFrameCallback` para exibir um `SnackBar` após a conclusão do próximo frame:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Exemplo')),
+        body: MyWidget(),
+      ),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Olá, Snackbar!')),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Exemplo de addPostFrameCallback'));
+  }
+}
+```
+
+No exemplo acima, o `SnackBar` é exibido assim que a tela é carregada e renderizada. O `addPostFrameCallback` garante que a ação seja executada somente após a interface do usuário estar pronta.
