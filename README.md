@@ -5,9 +5,11 @@
 Para criar projetos Flutter via linha de comando, primeiro você precisa instalar o Flutter SDK no seu computador. Após a instalação, você pode utilizar o comando `flutter create` para criar um novo projeto.
 
 Siga estes passos:
+
 1.  Abra um terminal (no macOS e Linux) ou prompt de comando (no Windows).
 2.  Navegue até o diretório onde deseja criar o projeto.
 3.  Utilize o seguinte comando para criar um projeto Flutter personalizado:
+
 ```powershell
 flutter create \
 --project-name=flutter_primeiros_passos \
@@ -18,18 +20,21 @@ flutter create \
 ```
 
 Vamos analisar os parâmetros utilizados:
--   `--project-name=flutter_primeiros_passos`: Define o nome do projeto como "flutter_primeiros_passos".
--   `--org br.com.victorfariasdeoliveira`: Define a organização do projeto como "br.com.victorfariasdeoliveira". Essa informação é usada para gerar o pacote do aplicativo no formato "org_name.project_name" (por exemplo,"br.com.victorfariasdeoliveira.flutter_primeiros_passos").
--   `--platforms android`: Define que o projeto deve ser criado apenas com suporte para a plataforma Android.
--   `-a kotlin`: Especifica que o código nativo gerado para a plataforma Android deve ser escrito em Kotlin. Por padrão, o Flutter gera código nativo em Java para projetos Android.
--   `./flutter_primeiros_passos`: Define o diretório em que o projeto será criado. Neste caso, o projeto será criado no diretório atual em uma pasta chamada "flutter_primeiros_passos".
+
+- `--project-name=flutter_primeiros_passos`: Define o nome do projeto como "flutter_primeiros_passos".
+- `--org br.com.victorfariasdeoliveira`: Define a organização do projeto como "br.com.victorfariasdeoliveira". Essa informação é usada para gerar o pacote do aplicativo no formato "org_name.project_name" (por exemplo,"br.com.victorfariasdeoliveira.flutter_primeiros_passos").
+- `--platforms android`: Define que o projeto deve ser criado apenas com suporte para a plataforma Android.
+- `-a kotlin`: Especifica que o código nativo gerado para a plataforma Android deve ser escrito em Kotlin. Por padrão, o Flutter gera código nativo em Java para projetos Android.
+- `./flutter_primeiros_passos`: Define o diretório em que o projeto será criado. Neste caso, o projeto será criado no diretório atual em uma pasta chamada "flutter_primeiros_passos".
 
 4. Navegue até o diretório do projeto recém-criado:
+
 ```powershell
 cd flutter_primeiros_passos
 ```
 
 5. (Opcional) Verifique se tudo está funcionando corretamente executando o aplicativo de exemplo no emulador ou dispositivo conectado. Certifique-se de que o emulador esteja em execução ou o dispositivo esteja conectado, e use o comando:
+
 ```powershell
 flutter run
 ```
@@ -37,6 +42,7 @@ flutter run
 Agora você tem um novo projeto Flutter criado via linha de comando com opções específicas, e está pronto para começar a desenvolver seu aplicativo. Você pode abrir a pasta do projeto no seu editor de código favorito e começar a editar os arquivos, como "lib/main.dart", para personalizar seu aplicativo.
 
 ---
+
 ## O que é Flutter
 
 O Flutter é um framework de desenvolvimento de código aberto criado pelo Google para criar aplicativos móveis, web e desktop a partir de uma única base de código. Ele é construído usando a linguagem de programação Dart e oferece uma ampla gama de widgets e ferramentas para ajudar a criar interfaces de usuário ricas e responsivas com facilidade.
@@ -149,12 +155,13 @@ No Flutter, os widgets são a base para a construção de interfaces de usuário
 
 ### Stateless
 
--   Um widget que descreve parte da interface do usuário que não depende de nenhum estado.
--   Não armazena informações mutáveis.
--   É imutável, o que significa que, uma vez criado, não pode ser alterado. Se você precisa alterar a aparência do widget, deve criar um novo widget com as novas propriedades.
--   Ideal para partes da interface do usuário que permanecem relativamente constantes e não precisam ser atualizadas com base em interações do usuário ou eventos de aplicativo.
+- Um widget que descreve parte da interface do usuário que não depende de nenhum estado.
+- Não armazena informações mutáveis.
+- É imutável, o que significa que, uma vez criado, não pode ser alterado. Se você precisa alterar a aparência do widget, deve criar um novo widget com as novas propriedades.
+- Ideal para partes da interface do usuário que permanecem relativamente constantes e não precisam ser atualizadas com base em interações do usuário ou eventos de aplicativo.
 
 Exemplo de StatelessWidget:
+
 ```dart
 class MeuStatelessWidget extends StatelessWidget {
   final String texto;
@@ -170,12 +177,13 @@ class MeuStatelessWidget extends StatelessWidget {
 
 ### Statefull
 
--   Um widget que pode mudar ao longo do tempo (ou seja, é mutável).
--   Pode armazenar informações de estado que podem ser alteradas ao longo do tempo.
--   É composto por duas classes: a classe StatefulWidget e uma classe separada que estende `State`.
--   Ideal para partes da interface do usuário que precisam ser atualizadas dinamicamente com base em interações do usuário, eventos de aplicativo ou dados que mudam com o tempo.
+- Um widget que pode mudar ao longo do tempo (ou seja, é mutável).
+- Pode armazenar informações de estado que podem ser alteradas ao longo do tempo.
+- É composto por duas classes: a classe StatefulWidget e uma classe separada que estende `State`.
+- Ideal para partes da interface do usuário que precisam ser atualizadas dinamicamente com base em interações do usuário, eventos de aplicativo ou dados que mudam com o tempo.
 
 Exemplo de StatefulWidget:
+
 ```dart
 class MeuStatefulWidget extends StatefulWidget {
   @override
@@ -209,8 +217,7 @@ class _MeuStatefulWidgetState extends State<MeuStatefulWidget> {
 
 Em resumo, um StatelessWidget é usado para partes estáticas da interface do usuário que não precisam de atualizações dinâmicas, enquanto um StatefulWidget é usado para partes mutáveis da interface do usuário que requerem atualizações e interações.
 
-
-## Árvore de componentes 
+## Árvore de componentes
 
 No Flutter, a estrutura de uma aplicação é organizada em três partes principais: Widget Tree, Element Tree e Render Tree. Essas árvores trabalham juntas para criar e atualizar a interface do usuário.
 
@@ -228,9 +235,9 @@ A Render Tree gerencia o processo de layout (posicionamento e dimensionamento do
 
 Em resumo, a Widget Tree descreve a estrutura da interface do usuário, a Element Tree gerencia o ciclo de vida e atualizações dos widgets, e a Render Tree lida com o layout e a renderização na tela. Essas três árvores trabalham em conjunto para criar e atualizar a interface do usuário do aplicativo Flutter.
 
-![[Pasted image 20230425231822.png]]
-> Na imagem, podemos ver a ligação entre as árvores.
+![](Assets/Pastedimage20230425231822.png)
 
+> Na imagem, podemos ver a ligação entre as árvores.
 
 ## Ciclo de Vida
 
@@ -258,7 +265,8 @@ Além desses métodos, o objeto `State` também possui métodos como `didUpdateW
 
 Em resumo, os StatelessWidgets têm um ciclo de vida simples, com construtor e método `build`, enquanto os StatefulWidgets têm um ciclo de vida mais complexo, envolvendo a criação de um objeto `State` e a utilização de diversos métodos de ciclo de vida, como `initState`, `didChangeDependencies`, `build`, `didUpdateWidget` e `dispose`.
 
-![[Pasted image 20230425233129.png]]
+![](Assets/Pastedimage20230425233129.png)
+
 > Na imagem, podemos ver o ciclo de vida em detalhes.
 
 ## Executando funções depois da tela pronta (addPostFrameCallback)
